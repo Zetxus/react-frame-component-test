@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
+import { SketchPicker } from 'react-color';
+import Frame from 'react-frame-component';
 import './App.css';
 
 function App() {
+  const [color, setColor] = useState('#252950');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SketchPicker color={color} onChange={v => {
+        console.log('color is now ' + v.hex);
+        return setColor(v.hex);
+      }} />
+      <Frame initialContent={`<!DOCTYPE html><html><head></head><body><span style="color: ${color}">Hi</span></body></html>`}>
+        {null}
+      </Frame>
     </div>
   );
 }
